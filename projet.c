@@ -102,3 +102,73 @@ int afficherMenu() {
     scanf("%d", &choix);
     return choix;
 }
+void ajouterLivre() {
+    if (nbLivres >= MAX) {
+        printf("\n+---------------------------+\n");
+        printf("|    Bibliothèque pleine ! |\n");
+        printf("+---------------------------+\n");
+        return;
+    }
+
+    printf("\n===== AJOUT D'UN NOUVEAU LIVRE =====\n\n");
+
+    printf("Titre : ");
+    scanf(" %[^\n]", livres[nbLivres].titre);
+
+    printf("Auteur : ");
+    scanf(" %[^\n]", livres[nbLivres].auteur);
+
+    printf("Année de publication : ");
+    scanf("%d", &livres[nbLivres].annee);
+
+    do {
+        printf("ISBN (5 chiffres) : ");
+        scanf("%d", &livres[nbLivres].isbn);
+        if (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999) {
+            printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
+        }
+    } while (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999);
+
+    livres[nbLivres].etat = 0;
+    nbLivres++;
+
+    printf("\n+------------------------------+\n");
+    printf("|  Livre ajouté avec succès   |\n");
+    printf("+------------------------------+\n");
+    system("pause:");
+}
+void rechercherLivre() {
+    int choix;
+    char terme[100];
+    int trouve = 0;
+
+    printf("\n===== RECHERCHE D'UN LIVRE =====\n\n");
+    printf("Rechercher par : 1. Titre  2. Auteur : ");
+    scanf("%d", &choix);
+
+    if (choix == 1) {
+        printf("\nTitre à rechercher : ");
+        scanf(" %[^\n]", terme);
+        for (int i = 0; i < nbLivres; i++) {
+            if (strcmp(livres[i].titre, terme) == 0) {
+                afficherLivre(livres[i]);
+                trouve = 1;
+            }
+        }
+    } else if (choix == 2) {
+        printf("\nAuteur à rechercher : ");
+        scanf(" %[^\n]", terme);
+        for (int i = 0; i < nbLivres; i++) {
+            if (strcmp(livres[i].auteur, terme) == 0) {
+                afficherLivre(livres[i]);
+                trouve = 1;
+            }
+        }
+    } else {
+        printf("Choix invalide.\n");
+    }
+
+    if (!trouve) {
+        printf("\nAucun livre trouvé.\n");
+    }
+}
