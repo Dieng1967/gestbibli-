@@ -185,3 +185,41 @@ void afficherLivres() {
         afficherLivre(livres[i]);
     }
 }
+void supprimerLivre() {
+    int isbn, i, j, trouve = 0;
+
+    printf("\n===== SUPPRESSION D'UN LIVRE =====\n\n");
+    do{
+    printf("ISBN du livre à supprimer (5 chiffres) : ");
+    scanf("%d", &isbn);
+    if (isbn < 10000 || isbn > 99999) {
+        printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
+        }
+    } while (isbn < 10000 || isbn > 99999);
+
+
+
+    for (i = 0; i < nbLivres; i++) {
+        if (livres[i].isbn == isbn) {
+
+
+    for (j = i; j < nbLivres - 1; j++) {
+                livres[j] = livres[j + 1];
+            }
+            nbLivres--;
+            trouve = 1;
+            printf("\n+-----------------------------+\n");
+            printf("|   Livre supprimé avec succès |\n");
+            printf("+-----------------------------+\n");
+            break;
+        }
+    }
+
+    if (!trouve) {
+        printf("\n+---------------------+\n");
+        printf("| Livre introuvable ! |\n");
+        printf("+---------------------+\n");
+    }
+}
+
+
