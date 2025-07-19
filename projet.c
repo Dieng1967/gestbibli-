@@ -172,3 +172,16 @@ void rechercherLivre() {
         printf("\nAucun livre trouvé.\n");
     }
 }
+void afficherLivre(struct Livre livre) {
+    printf("Titre: %s\n", livre.titre);
+    printf("Auteur: %s\n", livre.auteur);
+    printf("Année: %d\n", livre.annee);
+    printf("ISBN: %d\n", livre.isbn);
+    printf("État: %s\n\n", livre.etat ? "Emprunté" : "Disponible");
+}
+void afficherLivres() {
+    printf("\n=== LIVRES DISPONIBLES ===\n\n");
+    for (int i = 0; i < nbLivres; i++) {
+        afficherLivre(livres[i]);
+    }
+}
