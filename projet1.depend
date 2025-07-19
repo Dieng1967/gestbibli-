@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1751561600 source:c:\users\dieng\documents\langage c\projet.c\projet1\main.c
+	<stdio.h>
+	"projet.h"
+
+1751562875 c:\users\dieng\documents\langage c\projet.c\projet1\projet.h
+	<stdio.h>
+
+1752926140 source:c:\users\dieng\documents\langage c\projet.c\projet1\projet.c
+	<stdio.h>
+	<string.h>
+	"projet.h"
+
