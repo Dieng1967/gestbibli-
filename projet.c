@@ -9,19 +9,25 @@ struct Emprunt emprunts[MAX];
 int nbLivres = 0;
 int nbEmprunts = 0;
 
-void emprunterLivre() {
+void emprunterLivre()
+{
     int isbn, i, trouve = 0;
-    do {
+    do
+    {
         printf("\n===== EMPRUNT D'UN LIVRE =====\n\n");
         printf("ISBN du livre à emprunter (5 chiffres): ");
         scanf("%d", &isbn);
-        if (isbn < 10000 || isbn > 99999) {
+        if (isbn < 10000 || isbn > 99999)
+        {
             printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
         }
-    } while (isbn < 10000 || isbn > 99999);
+    }
+    while (isbn < 10000 || isbn > 99999);
 
-    for (i = 0; i < nbLivres; i++) {
-        if (livres[i].isbn == isbn && livres[i].etat == 0) {
+    for (i = 0; i < nbLivres; i++)
+    {
+        if (livres[i].isbn == isbn && livres[i].etat == 0)
+        {
             livres[i].etat = 1;
             emprunts[nbEmprunts].isbn = isbn;
 
@@ -43,7 +49,8 @@ void emprunterLivre() {
         }
     }
 
-    if (!trouve) {
+    if (!trouve)
+    {
         printf("\n+-----------------------------------+\n");
         printf("| Livre non disponible ou introuvable |\n");
         printf("+-----------------------------------+\n");
@@ -51,19 +58,25 @@ void emprunterLivre() {
     system("pause");
 }
 
-void retournerLivre() {
+void retournerLivre()
+{
     int isbn, i, trouve = 0;
-    do {
+    do
+    {
         printf("\n===== RETOUR D'UN LIVRE =====\n\n");
         printf("ISBN du livre à retourner : ");
         scanf("%d", &isbn);
-        if (isbn < 10000 || isbn > 99999) {
+        if (isbn < 10000 || isbn > 99999)
+        {
             printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
         }
-    } while (isbn < 10000 || isbn > 99999);
+    }
+    while (isbn < 10000 || isbn > 99999);
 
-    for (i = 0; i < nbLivres; i++) {
-        if (livres[i].isbn == isbn && livres[i].etat == 1) {
+    for (i = 0; i < nbLivres; i++)
+    {
+        if (livres[i].isbn == isbn && livres[i].etat == 1)
+        {
             livres[i].etat = 0;
             printf("\n+------------------------------+\n");
             printf("|   Livre retourné avec succès  |\n");
@@ -73,7 +86,8 @@ void retournerLivre() {
         }
     }
 
-    if (!trouve) {
+    if (!trouve)
+    {
         printf("\n+----------------------------------+\n");
         printf("| Livre non trouvé ou déjà disponible |\n");
         printf("+----------------------------------+\n");
@@ -81,7 +95,8 @@ void retournerLivre() {
     system("pause");
 }
 
-int afficherMenu() {
+int afficherMenu()
+{
     system("cls");
     int choix;
     printf("\n+==================================+\n");
@@ -101,8 +116,10 @@ int afficherMenu() {
     return choix;
 }
 
-void ajouterLivre() {
-    if (nbLivres >= MAX) {
+void ajouterLivre()
+{
+    if (nbLivres >= MAX)
+    {
         printf("\n+---------------------------+\n");
         printf("|    Bibliothèque pleine ! |\n");
         printf("+---------------------------+\n");
@@ -121,13 +138,16 @@ void ajouterLivre() {
     printf("Année de publication : ");
     scanf("%d", &livres[nbLivres].annee);
 
-    do {
+    do
+    {
         printf("ISBN (5 chiffres) : ");
         scanf("%d", &livres[nbLivres].isbn);
-        if (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999) {
+        if (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999)
+        {
             printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
         }
-    } while (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999);
+    }
+    while (livres[nbLivres].isbn < 10000 || livres[nbLivres].isbn > 99999);
 
     livres[nbLivres].etat = 0;
     nbLivres++;
@@ -138,7 +158,8 @@ void ajouterLivre() {
     system("pause");
 }
 
-void rechercherLivre() {
+void rechercherLivre()
+{
     int choix;
     char terme[100];
     int trouve = 0;
@@ -147,35 +168,46 @@ void rechercherLivre() {
     printf("Rechercher par : 1. Titre  2. Auteur : ");
     scanf("%d", &choix);
 
-    if (choix == 1) {
+    if (choix == 1)
+    {
         printf("\nTitre à rechercher : ");
         scanf(" %[^\n]", terme);
-        for (int i = 0; i < nbLivres; i++) {
-            if (strcmp(livres[i].titre, terme) == 0) {
+        for (int i = 0; i < nbLivres; i++)
+        {
+            if (strcmp(livres[i].titre, terme) == 0)
+            {
                 afficherLivre(livres[i]);
                 trouve = 1;
             }
         }
-    } else if (choix == 2) {
+    }
+    else if (choix == 2)
+    {
         printf("\nAuteur à rechercher : ");
         scanf(" %[^\n]", terme);
-        for (int i = 0; i < nbLivres; i++) {
-            if (strcmp(livres[i].auteur, terme) == 0) {
+        for (int i = 0; i < nbLivres; i++)
+        {
+            if (strcmp(livres[i].auteur, terme) == 0)
+            {
                 afficherLivre(livres[i]);
                 trouve = 1;
             }
         }
-    } else {
+    }
+    else
+    {
         printf("Choix invalide.\n");
     }
 
-    if (!trouve) {
+    if (!trouve)
+    {
         printf("\nAucun livre trouvé.\n");
     }
     system("pause");
 }
 
-void afficherLivre(struct Livre livre) {
+void afficherLivre(struct Livre livre)
+{
     printf("Titre: %s\n", livre.titre);
     printf("Auteur: %s\n", livre.auteur);
     printf("Année: %d\n", livre.annee);
@@ -183,29 +215,38 @@ void afficherLivre(struct Livre livre) {
     printf("État: %s\n\n", livre.etat ? "Emprunté" : "Disponible");
 }
 
-void afficherLivres() {
+void afficherLivres()
+{
     printf("\n=== LIVRES DISPONIBLES ===\n\n");
-    for (int i = 0; i < nbLivres; i++) {
+    for (int i = 0; i < nbLivres; i++)
+    {
         afficherLivre(livres[i]);
     }
     system("pause");
 }
 
-void supprimerLivre() {
+void supprimerLivre()
+{
     int isbn, i, j, trouve = 0;
 
     printf("\n===== SUPPRESSION D'UN LIVRE =====\n\n");
-    do {
+    do
+    {
         printf("ISBN du livre à supprimer (5 chiffres) : ");
         scanf("%d", &isbn);
-        if (isbn < 10000 || isbn > 99999) {
+        if (isbn < 10000 || isbn > 99999)
+        {
             printf("ISBN invalide. Veuillez entrer un nombre à 5 chiffres.\n");
         }
-    } while (isbn < 10000 || isbn > 99999);
+    }
+    while (isbn < 10000 || isbn > 99999);
 
-    for (i = 0; i < nbLivres; i++) {
-        if (livres[i].isbn == isbn) {
-            for (j = i; j < nbLivres - 1; j++) {
+    for (i = 0; i < nbLivres; i++)
+    {
+        if (livres[i].isbn == isbn)
+        {
+            for (j = i; j < nbLivres - 1; j++)
+            {
                 livres[j] = livres[j + 1];
             }
             nbLivres--;
@@ -217,11 +258,26 @@ void supprimerLivre() {
         }
     }
 
-    if (!trouve) {
+    if (!trouve)
+    {
         printf("\n+---------------------+\n");
         printf("| Livre introuvable ! |\n");
         printf("+---------------------+\n");
     }
     system("pause");
 }
-
+void afficherStatistiques()
+{
+    int empruntes = 0;
+    for (int i = 0; i < nbLivres; i++)
+    {
+        if (livres[i].etat == 1)
+        {
+            empruntes++;
+        }
+    }
+    printf("Total livres : %d\n", nbLivres);
+    printf("Livres empruntés : %d\n", empruntes);
+    printf("Livres disponibles : %d\n", nbLivres - empruntes);
+    system("pause");
+}
